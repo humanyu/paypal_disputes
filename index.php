@@ -1,4 +1,8 @@
-<?php date_default_timezone_set('Asia/Kolkata');  ?>
+<?php date_default_timezone_set('Asia/Kolkata'); 
+
+
+
+ ?>
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Humanyu Malik</title>
@@ -66,7 +70,7 @@
 		  </div>
 		  <div class="col-sm-6" style="background-color: #dff0d8">
 		  	<div class="row">
-		  		<h3>Resolved (<b  class="" id="solve">0</b>)</h3>
+		  		<h3>Resolved (<b  class="commonClass" id="solve">0</b>)</h3>
 		  		<div class="col-sm-6" style="background-color: #41d42f">Won:
 		  			<b class="commonClass2 " id="won">0</b>
 		  		</div>

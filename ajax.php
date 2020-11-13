@@ -5,12 +5,12 @@ $Results=[];
 function getData($url){
 global $token;
 $ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization:Bearer '.$token));
-		   curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
+		      curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
 		curl_setopt($ch, CURLOPT_ENCODING, ''); 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+		curl_setopt($ch, CURLOPT_URL, $url);
             $ret = curl_exec($ch);
 			curl_close($ch);
 			return json_decode($ret,true);
