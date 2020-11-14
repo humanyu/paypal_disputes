@@ -40,13 +40,13 @@ $curly[$id] = curl_init();
  curl_multi_close($mh);
  return array('won'=>$won,'lost'=>$lost);
 }
-if(isset($_SESSION['lastTime'])){
+/*(isset($_SESSION['lastTime'])){
 	$diff=time()-$_SESSION['lastTime'];
 	$timeDiff=60-$diff;
 	if($diff < 60){
 	sleep($timeDiff);	
 	}
-	}
+	}*/
 	$disputeOutcome=multiRequest($_POST['link']);
 	if($disputeOutcome['won']!=0 || $disputeOutcome['lost']!=0){
 $arr = array('won' => $disputeOutcome['won'], 'lost' => $disputeOutcome['lost'], 'status' => 1);

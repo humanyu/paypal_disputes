@@ -95,12 +95,8 @@
 </tr>
 </thead>
 <tbody>
-
-
-
 </tbody>
 </table>
-
 <script src="code.js"></script>
 		</body>
 		
