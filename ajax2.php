@@ -1,10 +1,8 @@
 <?php 
-session_start();
-date_default_timezone_set('Asia/Kolkata');
-include('token.php');
-$Results=[];
+date_default_timezone_set('Asia/Kolkata');//country india time zone
+include('token.php'); //call a token
 function multiRequest($data) {
-	global $token;
+	global $token; //global initialize to token
   $curly = array();
   $result = array();
   $won=0;
@@ -25,30 +23,22 @@ $curly[$id] = curl_init();
   do {
     curl_multi_exec($mh, $running);
   } while($running > 0);
- $_SESSION['lastTime']=time();
   foreach($curly as $id => $c) {
-    $dOutcome = json_decode(curl_multi_getcontent($c));
+    $dOutcome = json_decode(curl_multi_getcontent($c));//fetch data from api with multi request
 	if(isset($dOutcome->dispute_outcome->outcome_code)){
-	if($dOutcome->dispute_outcome->outcome_code=="RESOLVED_SELLER_FAVOUR"){
+	if($dOutcome->dispute_outcome->outcome_code=="RESOLVED_SELLER_FAVOUR"){//check won condition
 	$won++;
-	} else if($dOutcome->dispute_outcome->outcome_code=="RESOLVED_BUYER_FAVOUR"){
+	} else if($dOutcome->dispute_outcome->outcome_code=="RESOLVED_BUYER_FAVOUR"){ //check lost condition
 	$lost++;	
 	}
 	}
     curl_multi_remove_handle($mh, $c);
   }
- curl_multi_close($mh);
+ curl_multi_close($mh);//close multi curl api
  return array('won'=>$won,'lost'=>$lost);
 }
-/*(isset($_SESSION['lastTime'])){
-	$diff=time()-$_SESSION['lastTime'];
-	$timeDiff=60-$diff;
-	if($diff < 60){
-	sleep($timeDiff);	
-	}
-	}*/
-	$disputeOutcome=multiRequest($_POST['link']);
-	if($disputeOutcome['won']!=0 || $disputeOutcome['lost']!=0){
+	$disputeOutcome=multiRequest($_POST['link']);//call a dispute details api with multiple  
+	if($disputeOutcome['won']!=0 || $disputeOutcome['lost']!=0){ //check no of won or lost must be grater than 1
 $arr = array('won' => $disputeOutcome['won'], 'lost' => $disputeOutcome['lost'], 'status' => 1);
 } else {
 $arr = array( 'status' => 0);	
